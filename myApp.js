@@ -9,7 +9,7 @@ mongoose.connect(process.env.MONGO_URI, {
 const PersonSchema = new mongoose.Schema({
   name: { type: String, required: true },
   age: { type: Number },
-  foods: { type: [String] },
+  favoriteFoods: { type: [String] },
 });
 
 let Person = mongoose.model("Person", PersonSchema);
