@@ -16,16 +16,17 @@ let Person = mongoose.model("Person", PersonSchema);
 
 const createAndSavePerson = done => {
   const person = new Person({
-    name: MediaStreamAudioDestinationNode,
+    name: "Mario",
     age: 48,
     favoriteFoods: ["pizza"],
   });
 
   person.save((err, data) => {
     if (err) {
-      return done(err);
+      done(err);
+    } else {
+      done(null, data);
     }
-    return done(null, data);
   });
 };
 
