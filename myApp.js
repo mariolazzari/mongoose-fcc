@@ -21,12 +21,12 @@ const createAndSavePerson = done => {
     favoriteFoods: ["pizza"],
   });
 
-  person
-    .save()
-    .then(data => done(null, data))
-    .catch(err => done(err));
-
-  //  done(null /*, data*/);
+  person.save((err, data) => {
+    if (err) {
+      return done(err);
+    }
+    done(null, data);
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
