@@ -30,7 +30,7 @@ const createAndSavePerson = done => {
   });
 };
 
-var arrayOfPeople = [
+const arrayOfPeople = [
   { name: "Mario", age: 48, favoriteFoods: ["Pizza"] },
   { name: "Mariarosa", age: 46, favoriteFoods: ["Pizza"] },
   { name: "Roberto", age: 74, favoriteFoods: ["Pizza"] },
@@ -67,7 +67,13 @@ const findOneByFood = (food, done) => {
 };
 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById(personId, (err, data) => {
+    if (err) {
+      done(err);
+    } else {
+      done(null, data);
+    }
+  });
 };
 
 const findEditThenSave = (personId, done) => {
