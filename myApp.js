@@ -39,40 +39,36 @@ const arrayOfPeople = [
 const createManyPeople = (arrayOfPeople, done) => {
   Person.create(arrayOfPeople, (err, data) => {
     if (err) {
-      done(err);
-    } else {
-      done(null, data);
+      return done(err);
     }
+    done(null, data);
   });
 };
 
 const findPeopleByName = (personName, done) => {
   Person.find({ name: personName }, (err, data) => {
     if (err) {
-      done(err);
-    } else {
-      done(null, data);
+      return done(err);
     }
+    done(null, data);
   });
 };
 
 const findOneByFood = (food, done) => {
   Person.findOne({ favoriteFoods: food }, (err, data) => {
     if (err) {
-      done(err);
-    } else {
-      done(null, data);
+      return done(err);
     }
+    done(null, data);
   });
 };
 
 const findPersonById = (personId, done) => {
   Person.findById(personId, (err, data) => {
     if (err) {
-      done(err);
-    } else {
-      done(null, data);
+      return done(err);
     }
+    done(null, data);
   });
 };
 
@@ -80,7 +76,7 @@ const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
   Person.findById(personId, (err, person) => {
     if (err) {
-      done(err);
+      return done(err);
     }
 
     // add "hamburger" to favoriteFoods
@@ -89,18 +85,26 @@ const findEditThenSave = (personId, done) => {
     // callback - save() the updated Person.
     person.save((err, data) => {
       if (err) {
-        done(er);
-      } else {
-        done(null, data);
+        return done(er);
       }
+      done(null, data);
     });
   });
 };
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  Person.findOneAndUpdate(
+    { name: personName },
+    { age: ageToSet },
+    { new: true },
+    (err, data) => {
+      if (err) {
+        return done(err);
+      }
+      done(null, data);
+    }
+  );
 };
 
 const removeById = (personId, done) => {
